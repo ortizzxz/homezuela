@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export default function PublicNavbar() {
   const [open, setOpen] = useState(false);
 
-  // Define all nav items with paths
   const navItems = [
     { name: "Buy", path: "/buy" },
     { name: "Sell", path: "/sell" },
@@ -18,7 +17,7 @@ export default function PublicNavbar() {
   return (
     <header className="w-full border-b border-gray-200">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-        {/* Left: logo */}
+        {/* Logo */}
         <Link to="/">
           <div className="flex items-center gap-2">
             <span className="text-2xl tracking-tight">
@@ -31,8 +30,8 @@ export default function PublicNavbar() {
           </div>
         </Link>
 
-        {/* Desktop links */}
-        <nav className="hidden h-full items-stretch text-sm font-medium text-gray-700 md:flex">
+        {/* Desktop navigation */}
+        <nav className="hidden md:flex h-full items-stretch text-sm font-medium text-gray-700">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -67,10 +66,12 @@ export default function PublicNavbar() {
           >
             Advertise
           </Link>
+        </div>
 
-          {/* Mobile menu button */}
+        {/* Mobile hamburger button */}
+        <div className="flex md:hidden">
           <button
-            className="inline-flex h-8 w-8 items-center justify-center rounded md:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center rounded"
             onClick={() => setOpen((prev) => !prev)}
           >
             <span className="sr-only">Toggle menu</span>
@@ -116,7 +117,7 @@ export default function PublicNavbar() {
             <Link
               key={item.name}
               to={item.path}
-              onClick={() => setOpen(false)} // close menu on click
+              onClick={() => setOpen(false)}
               className="w-full rounded-lg px-3 py-2 text-left hover:bg-gray-100 hover:text-black transition-colors"
             >
               {item.name}

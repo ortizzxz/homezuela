@@ -5,7 +5,7 @@ interface Filters {
     beds: string;
     price: string;
     location: string;
-    types: string[]; // Changed to array for multi-select
+    types: string[];
 }
 
 interface Props {
@@ -94,9 +94,9 @@ export default function SearchFilters({ onSearch }: Props) {
     const typeOptions = ["house", "flat", "land/terrain", "other"];
 
     return (
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-8">
-            {/* First Line: Controls */}
-            <div className="flex flex-wrap items-center gap-4 mb-2">
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-6 mb-8">
+            {/* Desktop: Exact horizontal layout you want */}
+            <div className="hidden md:flex flex-wrap items-center gap-4 mb-2">
                 {/* Location Search */}
                 <div className="relative flex-shrink-0 min-w-[240px]">
                     <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -126,16 +126,16 @@ export default function SearchFilters({ onSearch }: Props) {
                 </div>
 
                 {/* Type - Multi-select */}
-                <div className="flex items-center gap-1 text-sm font-medium text-gray-700 flex-shrink-0 ">
+                <div className="flex items-center gap-1 text-sm font-medium text-gray-700 flex-shrink-0">
                     <Home className="w-4 h-4 text-gray-500" />
-                    <div className="flex flex-wrap gap-1 p-1 bg-gray-50 border border-gray-200 rounded-lg max-w-full">
+                    <div className="flex flex-wrap gap-1 p-1 bg-gray-50 border border-gray-200 rounded-lg max-w-xs">
                         {typeOptions.map((t) => (
                             <button
                                 key={t}
                                 onClick={() => toggleType(t)}
                                 className={`px-3 py-2 rounded-lg transition-all whitespace-nowrap text-sm ${filters.types.includes(t)
-                                        ? "bg-gray-900 text-white shadow-sm"
-                                        : "bg-white text-gray-700 hover:bg-gray-200 border border-gray-200"
+                                    ? "bg-gray-900 text-white shadow-sm"
+                                    : "bg-white text-gray-700 hover:bg-gray-200 border border-gray-200"
                                     }`}
                             >
                                 {capitalize(t)}
@@ -156,28 +156,27 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Price */}
                 <div className="flex items-center gap-1 text-sm font-medium text-gray-700 flex-shrink-0">
                     <DollarSign className="w-4 h-4 text-gray-500" />
-                    <div className="flex bg-gray-100 border border-gray-200 rounded-lg p-1.5">
+                    <div className="flex items-center bg-gray-100 border border-gray-200 rounded-lg p-1.5">
                         <input
                             type="text"
                             inputMode="numeric"
                             placeholder="Min"
-                            className={`w-20 px-2 py-1.5 text-sm border-0 bg-transparent focus:outline-none ${priceError ? "text-red-600" : "text-gray-900"
-                                }`}
+                            className={`w-20 px-2 py-1.5 text-sm border-0 bg-transparent focus:outline-none ${priceError ? "text-red-600" : "text-gray-900"}`}
                             value={minPrice}
                             onChange={handleMinChange}
                         />
-                        <span className="px-1.5 text-gray-500 font-medium">–</span>
+                        <span className="px-2 text-gray-500 font-medium flex items-center justify-center h-full">–</span>
                         <input
                             type="text"
                             inputMode="numeric"
                             placeholder="Max"
-                            className={`w-20 px-2 py-1.5 text-sm border-0 bg-transparent focus:outline-none ${priceError ? "text-red-600" : "text-gray-900"
-                                }`}
+                            className={`w-20 px-2 py-1.5 text-sm border-0 bg-transparent focus:outline-none ${priceError ? "text-red-600" : "text-gray-900"}`}
                             value={maxPrice}
                             onChange={handleMaxChange}
                         />
                     </div>
                 </div>
+
 
                 {/* Spacer + Search Button */}
                 <div className="flex-1 min-w-0"></div>
@@ -190,8 +189,104 @@ export default function SearchFilters({ onSearch }: Props) {
                 </button>
             </div>
 
-            {/* Second Line: Active Filters ONLY */}
-            <div className="flex flex-wrap gap-2">
+            {/* Mobile: Stacked layout */}
+            <div className="md:hidden space-y-4 mb-4">
+                {/* Location Search */}
+                <div className="relative">
+                    <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                        className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                        placeholder="City, neighborhood..."
+                        value={filters.location}
+                        onChange={(e) => handleChange("location", e.target.value)}
+                    />
+                </div>
+
+                {/* Beds */}
+                <div className="flex items-center gap-2 p-3 bg-gray-50 border border-gray-200 rounded-xl">
+                    <Bed className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <div className="flex flex-wrap gap-1 flex-1">
+                        {bedOptions.map((b) => (
+                            <button
+                                key={b}
+                                onClick={() => handleChange("beds", b)}
+                                className={`px-3 py-2 rounded-lg transition-all whitespace-nowrap text-sm ${filters.beds === b
+                                    ? "bg-gray-900 text-white shadow-sm"
+                                    : "bg-white text-gray-700 hover:bg-gray-200 border border-gray-200"
+                                    }`}
+                            >
+                                {b || "Any"}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Type */}
+                <div className="flex items-center gap-2 p-3 bg-gray-50 border border-gray-200 rounded-xl">
+                    <Home className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <div className="flex flex-wrap gap-1 flex-1">
+                        {typeOptions.map((t) => (
+                            <button
+                                key={t}
+                                onClick={() => toggleType(t)}
+                                className={`px-3 py-2 rounded-lg transition-all whitespace-nowrap text-sm ${filters.types.includes(t)
+                                    ? "bg-gray-900 text-white shadow-sm"
+                                    : "bg-white text-gray-700 hover:bg-gray-200 border border-gray-200"
+                                    }`}
+                            >
+                                {capitalize(t)}
+                            </button>
+                        ))}
+                        {filters.types.length > 0 && (
+                            <button
+                                onClick={clearAllTypes}
+                                className="px-2 py-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-200 text-sm ml-1"
+                                title="Clear all types"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                {/* Price */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 p-3 bg-gray-50 border border-gray-200 rounded-xl">
+                    <div className="flex w-full sm:w-auto bg-gray-100 border border-gray-300 rounded-lg overflow-hidden items-center">
+                        <DollarSign className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                        <input
+                            type="text"
+                            inputMode="numeric"
+                            placeholder="Min"
+                            className={`w-1/2 px-3 py-2 text-sm border-0 bg-transparent focus:outline-none ${priceError ? "text-red-600" : "text-gray-900"}`}
+                            value={minPrice}
+                            onChange={handleMinChange}
+                        />
+                        <span className="flex-shrink-0 px-3 py-2 text-gray-500 font-medium border-l border-r border-gray-300 text-center">–</span>
+                        <input
+                            type="text"
+                            inputMode="numeric"
+                            placeholder="Max"
+                            className={`w-1/2 px-3 py-2 text-sm border-0 bg-transparent focus:outline-none ${priceError ? "text-red-600" : "text-gray-900"}`}
+                            value={maxPrice}
+                            onChange={handleMaxChange}
+                        />
+                    </div>
+                </div>
+
+
+
+                {/* Mobile Search Button */}
+                <button
+                    onClick={handleSearchClick}
+                    className="w-full bg-gray-900 hover:bg-black text-white px-8 py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all text-sm flex items-center justify-center gap-2"
+                >
+                    Search
+                    <Search className="w-4 h-4" />
+                </button>
+            </div>
+
+            {/* Active Filters - Same for both */}
+            <div className="flex flex-wrap gap-2 pt-1">
                 {filters.location && (
                     <span
                         className="bg-gray-200 text-gray-800 border border-gray-300 px-3 py-2 rounded-full text-sm flex items-center gap-1 hover:bg-gray-200 transition-colors cursor-pointer"
@@ -227,17 +322,15 @@ export default function SearchFilters({ onSearch }: Props) {
                 )}
                 {(minPrice || maxPrice) && (
                     <span
-                        className="bg-gray-100 text-gray-800  border border-gray-300 px-3 py-2 rounded-full text-sm flex items-center gap-1 hover:bg-gray-200 transition-colors cursor-pointer"
+                        className="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-2 rounded-full text-sm flex items-center gap-1 hover:bg-gray-200 transition-colors cursor-pointer"
                         onClick={() => handleRemoveFilter("price")}
                     >
                         <DollarSign className="w-4 h-4" />
-                        ${minPrice || "Any"}–${maxPrice || "1M"}
+                        ${minPrice || 0}–${maxPrice || 1000000}
                         <X className="w-4 h-4" />
                     </span>
                 )}
             </div>
-
-           
         </div>
     );
 }

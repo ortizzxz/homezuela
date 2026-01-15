@@ -11,7 +11,7 @@ interface Listing {
   sqft: number;
 }
 
-interface ListingProps{
+interface ListingProps {
   listing: Listing;
 }
 
@@ -44,7 +44,12 @@ function ListingCard({ listing }: ListingProps) {
       <div className="space-y-1 p-3">
         <div className="flex items-center justify-between">
           <p className="font-semibold text-2xl text-gray-900">
-            {listing.price}
+            {new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            }).format(listing.price)}
           </p>
           <p className="text-[14px] text-gray-800">
             {listing.city}
