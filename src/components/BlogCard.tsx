@@ -1,4 +1,19 @@
-function BlogCard({ post }) {
+
+interface Post {
+  id: number;
+  imageUrl: string;
+  title: string;
+  author: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+}
+
+interface BlogCardProps {
+  post: Post;
+}
+
+function BlogCard({ post }: BlogCardProps) {
   return (
     <article className="group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
       {/* Image */}

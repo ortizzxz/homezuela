@@ -21,7 +21,7 @@ export default function BuySection() {
   if (filters.price) {
     const [min, max] = filters.price.split("-").map(Number);
     results = results.filter((l) => {
-      const price = Number(l.price.replace(/\$|,/g, ""));
+      const price = l.price
       return price >= min && price <= max;
     });
   }

@@ -1,4 +1,21 @@
-function ListingCard({ listing }) {
+interface Listing {
+  title: string;
+  imageUrl: string;
+  type: string;
+  isNew: boolean;
+  price: number;
+  city: string;
+  neighborhood: string;
+  beds: number;
+  baths: number;
+  sqft: number;
+}
+
+interface ListingProps{
+  listing: Listing;
+}
+
+function ListingCard({ listing }: ListingProps) {
   return (
     <article className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       {/* Image */}
