@@ -4,6 +4,8 @@ import PublicNavbar from "./layout/PublicNavbar";
 import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
 import BuyPage from "./pages/BuyPage";
+import SellPage from "./pages/SellPage";
+import AdvertisePage from "./pages/AdvertisePage";
 function App() {
   return (
     <>
@@ -18,6 +20,12 @@ function App() {
 
         {/* Blog page */}
         <Route path="/blog" element={<BlogPage />} />
+        
+        {/* Sell page */}
+        <Route path="/sell" element={<SellPage />} />
+        
+        {/* Advertise page */}
+        <Route path="/advertise" element={<AdvertisePage />} />
 
       </Routes>
 

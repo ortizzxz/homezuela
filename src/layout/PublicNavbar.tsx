@@ -8,8 +8,6 @@ export default function PublicNavbar() {
     { name: "Buy", path: "/buy" },
     { name: "Sell", path: "/sell" },
     { name: "Rent", path: "/rent" },
-    { name: "Mortgage", path: "/mortgage" },
-    { name: "Home Values", path: "/home-values" },
     { name: "Find Realtors", path: "/realtors" },
     { name: "Blog", path: "/blog" },
   ];
