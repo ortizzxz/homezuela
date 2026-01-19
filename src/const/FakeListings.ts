@@ -7,7 +7,8 @@ export interface Listing {
   sqft: number;
   city: string;
   neighborhood: string;
-  imageUrl: string;
+  imageUrl?: string;
+  imageFiles?: File[]
   isNew: boolean;
   type: string;   
 }

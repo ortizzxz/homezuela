@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DollarSign, Home, BedDouble, Bath, MapPin, Image as ImageIcon, Sparkles } from "lucide-react";
 import type { Listing } from "../const/FakeListings";
 
 interface CreateListingFormProps {
-  onSubmit: (data: Omit<Listing, "id" | "isNew"> & { imageFiles?: File[] }) => Promise<void> | void;
+  onSubmit: (data: Omit<Listing, "id" | "isNew">) => Promise<void> | void;
 }
 
 const PROPERTY_TYPES = ["house", "flat", "land/terrain", "other"];
 
 export function CreateListingForm({ onSubmit }: CreateListingFormProps) {
-  const [form, setForm] = useState<Omit<Listing, "id" | "isNew"> & { imageFiles: File[] }>({
+  const [form, setForm] = useState<Omit<Listing, "id" | "isNew">>({
     title: "",
     price: 0,
     beds: 0,
@@ -24,6 +24,7 @@ export function CreateListingForm({ onSubmit }: CreateListingFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [previews, setPreviews] = useState<string[]>([]);
 
   const handleChange = <K extends keyof typeof form>(key: K, value: typeof form[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -49,7 +50,7 @@ export function CreateListingForm({ onSubmit }: CreateListingFormProps) {
     if (!form.title.trim()) return setError("Please add a clear title for your listing.");
     if (!form.city.trim()) return setError("City is required.");
     if (!form.price || form.price <= 0) return setError("Price must be greater than 0.");
-    if (form.imageFiles.length === 0) return setError("Please upload at least one image.");
+    if (form.imageFiles!.length === 0) return setError("Please upload at least one image.");
 
     try {
       setIsSubmitting(true);
@@ -62,7 +63,48 @@ export function CreateListingForm({ onSubmit }: CreateListingFormProps) {
     }
   };
 
+  useEffect(() => {
+    const files = form.imageFiles || [];
+    // Generate URLs for all files
+    const objectUrls = files.map((file) => URL.createObjectURL(file));
+    setPreviews(objectUrls);
+
+    // CLEANUP: This is crucial. It revokes URLs when images 
+    // are reordered or removed to free up RAM.
+    return () => {
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [form.imageFiles]);
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    e.dataTransfer.setData("draggedIndex", index.toString());
+    // Optional: adds visual feedback that the item is "picked up"
+    e.currentTarget.style.opacity = "0.5";
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, targetIndex: number) => {
+    e.preventDefault();
+    const sourceIndexStr = e.dataTransfer.getData("draggedIndex");
+    if (sourceIndexStr === "") return;
+
+    const sourceIndex = parseInt(sourceIndexStr, 10);
+    if (sourceIndex === targetIndex) return;
+
+    const updatedFiles = [...(form.imageFiles || [])];
+    const [removed] = updatedFiles.splice(sourceIndex, 1);
+    updatedFiles.splice(targetIndex, 0, removed);
+
+    // Use your existing handleChange helper
+    handleChange("imageFiles", updatedFiles);
+  };
+
+  const removeImage = (index: number) => {
+    const updatedFiles = form.imageFiles!.filter((_, i) => i !== index);
+    handleChange("imageFiles", updatedFiles);
+  };
+
   return (
+
     <section className="w-full py-10 px-4 bg-gradient-to-b from-slate-50 to-slate-100">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
@@ -115,11 +157,10 @@ export function CreateListingForm({ onSubmit }: CreateListingFormProps) {
                         type="button"
                         key={t}
                         onClick={() => handleChange("type", t)}
-                        className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm transition whitespace-nowrap flex items-center gap-1 ${
-                          form.type === t
-                            ? "bg-slate-900 text-white shadow-sm"
-                            : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                        }`}
+                        className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm transition whitespace-nowrap flex items-center gap-1 ${form.type === t
+                          ? "bg-slate-900 text-white shadow-sm"
+                          : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                          }`}
                       >
                         <Home className="w-3.5 h-3.5" />
                         {t === "land/terrain" ? "Land / Terrain" : t.charAt(0).toUpperCase() + t.slice(1)}
@@ -211,18 +252,45 @@ export function CreateListingForm({ onSubmit }: CreateListingFormProps) {
                       className="w-full text-sm text-slate-900 outline-none"
                     />
                   </div>
-                  {form.imageFiles.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {form.imageFiles.map((file, idx) => (
-                        <img
-                          key={idx}
-                          src={URL.createObjectURL(file)}
-                          alt={`Preview ${idx + 1}`}
-                          className="w-24 h-24 object-cover rounded-xl border border-slate-200"
-                        />
-                      ))}
+                  {form.imageFiles!.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-4">
+                      {previews.map((url, idx) => {
+                        // Generate fresh URL each render, or use imageUrls[idx]
+                         return (
+                          <div
+                            key={url} // Use URL or file.name+Date.now() for stability
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, idx)}
+                            onDragOver={(e) => e.preventDefault()}
+                            onDrop={(e) => handleDrop(e, idx)}
+                            className="relative w-24 h-24 cursor-grab active:cursor-grabbing group"
+                          >
+                            <img
+                              src={url}
+                              alt={`Preview ${idx + 1}`}
+                              className="w-full h-full object-cover rounded-2xl border-2 border-slate-100 shadow-sm transition-transform duration-200 group-hover:scale-105"
+                              onLoad={() => { }} // Optional: track valid loads
+                            />
+                            {/* Permanent Delete Button */}
+                            <button
+                              type="button"
+                              onClick={() => removeImage(idx)}
+                              className="absolute -top-2 -right-2 w-7 h-7 bg-white text-slate-600 rounded-full border border-slate-200 shadow-md flex items-center justify-center transition-all hover:bg-red-50 hover:text-red-500 hover:border-red-200 active:scale-90"
+                              aria-label="Remove image"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+                              </svg>
+                            </button>
+
+                            {/* Optional: Drag Handle Indicator (visible on hover) */}
+                            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 rounded-2xl pointer-events-none transition-opacity" />
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
+
                 </div>
               </div>
 
