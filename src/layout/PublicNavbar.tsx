@@ -6,8 +6,8 @@ export default function PublicNavbar() {
 
   const navItems = [
     { name: "Buy", path: "/buy" },
-    { name: "Sell", path: "/sell" },
     { name: "Rent", path: "/rent" },
+    { name: "Sell", path: "/sell" },
     { name: "Find Realtors", path: "/realtors" },
     { name: "Blog", path: "/blog" },
   ];

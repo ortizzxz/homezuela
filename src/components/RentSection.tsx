@@ -3,7 +3,7 @@ import ListingCard from "./ListingCard";
 import { fakeListings } from "../const/FakeListings";
 import SearchFilters from "./SearchFilters";
 
-export default function BuySection() {
+export default function RentSection() {
   const [filteredListings, setFilteredListings] = useState(fakeListings);
 
   const handleSearch = (filters: any) => {
@@ -48,7 +48,7 @@ export default function BuySection() {
         {/* Results Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mt-2 mb-4 gap-4 px-4">
           <div>
-            <p className="text-2xl font-bold text-gray-900">{filteredListings.length} homes for sale</p>
+            <p className="text-2xl font-bold text-gray-900">{filteredListings.length} homes for rent</p>
             <p className="text-sm text-gray-600">Matching your search in Venezuela</p>
           </div>
         </div>

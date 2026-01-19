@@ -6,6 +6,7 @@ import BlogPage from "./pages/BlogPage";
 import BuyPage from "./pages/BuyPage";
 import SellPage from "./pages/SellPage";
 import AdvertisePage from "./pages/AdvertisePage";
+import RentPage from "./pages/RentPage";
 function App() {
   return (
     <>
@@ -17,6 +18,9 @@ function App() {
 
         {/* Blog page */}
         <Route path="/buy" element={<BuyPage />} />
+
+        {/* Rent page */}
+        <Route path="/rent" element={<RentPage />} />
 
         {/* Blog page */}
         <Route path="/blog" element={<BlogPage />} />

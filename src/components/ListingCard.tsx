@@ -1,15 +1,4 @@
-interface Listing {
-  title: string;
-  imageUrl: string;
-  type: string;
-  isNew: boolean;
-  price: number;
-  city: string;
-  neighborhood: string;
-  beds: number;
-  baths: number;
-  sqft: number;
-}
+import type { Listing } from "../const/FakeListings";
 
 interface ListingProps {
   listing: Listing;
