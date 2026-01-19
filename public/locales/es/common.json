@@ -23,6 +23,9 @@
         "selected": "Escogido/s",
         "find_properties": "Buscar Propiedades",
         "any": "Cualquiera",
-        "search_bar_placeholder": "Ciudad, barrio, ZIP..."
+        "search_bar_placeholder": "Ciudad, barrio, ZIP...",
+         "price_range": "Rango de Precios",
+        "monthly": "Mensual",
+        "search": "Buscar Propiedades"
     }
 }

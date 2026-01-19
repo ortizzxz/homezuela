@@ -22,7 +22,10 @@
         "property_type": "Property Type",
         "selected": "Selected",
         "find_properties": "Find Properties",
-        "any": "Any",
-        "search_bar_placeholder": "City, neighborhood, ZIP..."
+        "any": "Any Amount",
+        "search_bar_placeholder": "City, neighborhood, ZIP...",
+        "price_range": "Price Range",
+        "monthly": "Monthly",
+        "search": "Search Properties"
     }
 }

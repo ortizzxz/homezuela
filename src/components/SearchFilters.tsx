@@ -13,7 +13,7 @@ interface Props {
     onSearch: (filters: Filters) => void;
 }
 
-const isRentPage = window.location.pathname === '/rent';
+const isRentPage = window.location.pathname.startsWith("/rent");
 
 export default function SearchFilters({ onSearch }: Props) {
     const MAX_PRICE = 1_000_000;
@@ -126,8 +126,8 @@ export default function SearchFilters({ onSearch }: Props) {
                     <div className="flex justify-between items-end px-1">
                         <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.bedrooms')}</span>
                         {filters.beds && (
-                            <span className="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">
-                                {filters.beds === "4+" ? "Large Family" : "Selected"}
+                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">
+                                {filters.beds === "4+" ? "Large Family" : t('search_card.selected')}
                             </span>
                         )}
                     </div>
@@ -152,7 +152,7 @@ export default function SearchFilters({ onSearch }: Props) {
                 <div className="flex flex-col gap-1.5 flex-shrink-0">
                     <div className="flex justify-between items-end px-1">
                         <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.property_type')}</span>
-                        <span className="text-[10px] text-orange-600 font-bold bg-orange-50 px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">
                             {filters.types.length} {t('search_card.selected')}
                         </span>
                     </div>
@@ -178,9 +178,9 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Price (Your existing logic, slightly tightened) */}
                 <div className="flex flex-col gap-1.5 flex-shrink-0">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Price Range</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.price_range')}</span>
                         {isRentPage && (
-                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">Monthly</span>
+                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">{t('search_card.monthly')}</span>
                         )}
                     </div>
                     <div className={`flex items-center bg-gray-100 border transition-colors rounded-xl p-1 ${priceError ? "border-red-300 ring-1 ring-red-100" : "border-gray-200"}`}>
@@ -211,7 +211,7 @@ export default function SearchFilters({ onSearch }: Props) {
                         onClick={handleSearchClick}
                         className="bg-gray-900 hover:bg-black text-white px-8 py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all text-sm flex items-center gap-2"
                     >
-                        Search
+                        {t('search_card.search')}
                         <Search className="w-4 h-4" />
                     </button>
                 </div>
@@ -241,7 +241,7 @@ export default function SearchFilters({ onSearch }: Props) {
                     <div className="flex justify-between items-end px-1">
                         <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.bedrooms')}</span>
                         {filters.beds && (
-                            <span className="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">Selected</span>
+                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">{t('search_card.selected')}</span>
                         )}
                     </div>
                     <div className="flex items-center gap-2 p-2 bg-gray-100 border border-gray-200 rounded-xl">
@@ -293,9 +293,9 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Price Range */}
                 <div className="flex flex-col gap-1.5">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Price Range</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.price_range')}</span>
                         {isRentPage && (
-                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">Monthly</span>
+                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">{t('search_card.monthly')}</span>
                         )}
                     </div>
                     <div className={`flex items-center bg-gray-100 border transition-colors rounded-xl p-1.5 ${priceError ? "border-red-300 ring-1 ring-red-100" : "border-gray-200"}`}>
