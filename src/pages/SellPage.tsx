@@ -5,7 +5,7 @@ import { ProtectedGate } from "../components/ProtectedGate.tsx";
 export default function SellPage() {
     const user = null; // or your auth user
 
-    const handleLogin = async (email: string, password: string) => {
+    const handleLogin = () => {
         // call your API / Supabase / NextAuth etc.
         // if success, set user in your global state
     };
