@@ -1,0 +1,28 @@
+{
+    "hero": {
+        "title": "Find your dream home in",
+        "description": "Discover apartments, houses, and investments across all major Venezuelan cities, backed by verified listings and local experts.",
+        "trusted_market": "#1 trusted Venezuelan real estate market"
+    },
+    "nav": {
+        "buy": "Buy",
+        "rent": "Rent",
+        "sell": "Sell"
+    },
+    "listing_card": {
+        "sfh": "Single Family Home",
+        "apartment": "Apartment",
+        "condo": "Condo",
+        "land": "Land"
+    },
+    "search_card": {
+        "location": "Location",
+        "global_search": "Global Search",
+        "bedrooms": "Rooms",
+        "property_type": "Property Type",
+        "selected": "Selected",
+        "find_properties": "Find Properties",
+        "any": "Any",
+        "search_bar_placeholder": "City, neighborhood, ZIP..."
+    }
+}

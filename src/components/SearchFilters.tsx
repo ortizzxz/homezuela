@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Search, X, Bed, Home, DollarSign } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface Filters {
     beds: string;
@@ -16,6 +17,8 @@ const isRentPage = window.location.pathname === '/rent';
 
 export default function SearchFilters({ onSearch }: Props) {
     const MAX_PRICE = 1_000_000;
+
+    const {t} = useTranslation();
 
     const [filters, setFilters] = useState<Filters>({
         beds: "",
@@ -104,14 +107,14 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Location Search */}
                 <div className="flex flex-col gap-1.5 flex-shrink-0 min-w-[240px]">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Location</span>
-                        <span className="text-[10px] text-gray-400 font-medium italic">Global Search</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.location')}</span>
+                        <span className="text-[10px] text-gray-400 font-medium italic">{t('search_card.global_search')}</span>
                     </div>
                     <div className="relative">
                         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
                             className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all"
-                            placeholder="City, neighborhood..."
+                            placeholder={t('search_card.search_bar_placeholder')}
                             value={filters.location}
                             onChange={(e) => handleChange("location", e.target.value)}
                         />
@@ -121,7 +124,7 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Beds */}
                 <div className="flex flex-col gap-1.5 flex-shrink-0">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Bedrooms</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.bedrooms')}</span>
                         {filters.beds && (
                             <span className="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">
                                 {filters.beds === "4+" ? "Large Family" : "Selected"}
@@ -139,7 +142,7 @@ export default function SearchFilters({ onSearch }: Props) {
                                     : "text-gray-600 hover:bg-gray-200"
                                     }`}
                             >
-                                {b || "Any"}
+                                {b || t('search_card.any')}
                             </button>
                         ))}
                     </div>
@@ -148,9 +151,9 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Property Type */}
                 <div className="flex flex-col gap-1.5 flex-shrink-0">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Property Type</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.property_type')}</span>
                         <span className="text-[10px] text-orange-600 font-bold bg-orange-50 px-1.5 py-0.5 rounded">
-                            {filters.types.length} Selected
+                            {filters.types.length} {t('search_card.selected')}
                         </span>
                     </div>
                     <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-xl p-1">
@@ -219,14 +222,14 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Location Search */}
                 <div className="flex flex-col gap-1.5">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Location</span>
-                        <span className="text-[10px] text-gray-400 font-medium italic">Area search</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.location')}</span>
+                        <span className="text-[10px] text-gray-400 font-medium italic">{t('search_card.global_search')}</span>
                     </div>
                     <div className="relative">
                         <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
                             className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900"
-                            placeholder="City, neighborhood..."
+                            placeholder={t('search_card.search_bar_placeholder')}
                             value={filters.location}
                             onChange={(e) => handleChange("location", e.target.value)}
                         />
@@ -236,7 +239,7 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Beds */}
                 <div className="flex flex-col gap-1.5">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Bedrooms</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.bedrooms')}</span>
                         {filters.beds && (
                             <span className="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">Selected</span>
                         )}
@@ -253,7 +256,7 @@ export default function SearchFilters({ onSearch }: Props) {
                                             : "bg-white text-gray-700 border border-gray-200 shadow-sm"
                                         }`}
                                 >
-                                    {b || "Any"}
+                                    {b || t('search_card.any')}
                                 </button>
                             ))}
                         </div>
@@ -263,9 +266,9 @@ export default function SearchFilters({ onSearch }: Props) {
                 {/* Type - Multi-select */}
                 <div className="flex flex-col gap-1.5">
                     <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">Property Type</span>
+                        <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.property_type')}</span>
                         <div className="flex gap-2">
-                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">{filters.types.length} Selected</span>
+                            <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">{filters.types.length} {t('search_card.selected')}</span>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 p-2 bg-gray-50 border border-gray-200 rounded-xl">
@@ -322,7 +325,7 @@ export default function SearchFilters({ onSearch }: Props) {
                     onClick={handleSearchClick}
                     className="w-full bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-xl font-bold shadow-lg transition-all flex items-center justify-center gap-3 text-base active:scale-[0.98]"
                 >
-                    Find Properties
+                    {t('search_card.find_properties')}
                     <Search className="w-5 h-5" />
                 </button>
             </div>

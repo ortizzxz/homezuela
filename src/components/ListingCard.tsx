@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { Listing } from "../const/FakeListings";
 
 interface ListingProps {
@@ -5,6 +6,16 @@ interface ListingProps {
 }
 
 function ListingCard({ listing }: ListingProps) {
+  const { t } = useTranslation();
+
+  const typeTranslations: Record<string, string> = {
+    SFH: "listing_card.sfh",
+    Apartment: "listing_card.apartment",
+    Condo: "listing_card.condo",
+  };
+
+  const translationKey = typeTranslations[listing.type] || listing.type;
+
   return (
     <article className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       {/* Image */}
@@ -26,7 +37,7 @@ function ListingCard({ listing }: ListingProps) {
         {/* Blue dot */}
         <span className="h-2 w-2 rounded-full bg-blue-500 inline-block"></span>
         {/* Text */}
-        <span className="text-sm text-gray-700">{listing.type}</span>
+        <span className="text-sm text-gray-700">{t(translationKey)}</span>
       </div>
 
       {/* Content */}

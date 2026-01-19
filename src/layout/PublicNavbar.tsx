@@ -1,24 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Globe, ChevronDown } from "lucide-react"; // Added icons
+import { Globe, Menu, X } from "lucide-react";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export default function PublicNavbar() {
+  const { i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+
   const [open, setOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
-  const [language, setLanguage] = useState("EN");
-  const langRef = useRef<HTMLDivElement>(null);
-
-  // Close language dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(event.target as Node)) {
-        setLangOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   const navItems = [
     { name: "Buy", path: "/buy" },
     { name: "Rent", path: "/rent" },
@@ -26,6 +16,17 @@ export default function PublicNavbar() {
     { name: "Find Realtors", path: "/realtors" },
     { name: "Blog", path: "/blog" },
   ];
+
+
+  // Listen for language changes
+  useEffect(() => {
+    const handleLanguageChange = (lng: string) => setCurrentLang(lng);
+    i18n.on("languageChanged", handleLanguageChange);
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
+  }, [i18n]);
+
 
   return (
     <header className="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
@@ -63,47 +64,28 @@ export default function PublicNavbar() {
           <div className="h-4 w-[1px] bg-gray-300 mx-2" />
 
           {/* Language Dropdown */}
-          <div className="relative" ref={langRef}>
-            <button
-              onClick={() => setLangOpen(!langOpen)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-gray-100 text-sm font-medium text-gray-700 transition-all"
-            >
-              <Globe className="w-4 h-4 text-gray-500" />
-              <span>{language === "EN" ? "English" : "Español"}</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${langOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {langOpen && (
-              <div className="absolute right-0 mt-2 w-32 rounded-xl border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-                <button
-                  onClick={() => { setLanguage("EN"); setLangOpen(false); }}
-                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 ${language === "EN" ? "text-blue-600 font-bold" : "text-gray-700"}`}
-                >
-                  English
-                </button>
-                <button
-                  onClick={() => { setLanguage("ES"); setLangOpen(false); }}
-                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 ${language === "ES" ? "text-blue-600 font-bold" : "text-gray-700"}`}
-                >
-                  Español
-                </button>
-              </div>
-            )}
+          <div className="relative ml-2">
+            <LanguageSwitcher />
           </div>
         </div>
 
-        {/* Mobile hamburger button */}
+        {/* Mobile hamburger button area */}
         <div className="flex md:hidden items-center gap-4">
-           {/* Mobile Lang Shortcut */}
-           <button 
-            onClick={() => setLanguage(language === "EN" ? "ES" : "EN")}
-            className="text-xs font-bold text-gray-500 border border-gray-300 rounded px-2 py-1"
+          {/* Mobile Lang Shortcut: Toggles between EN and ES */}
+          <button
+            onClick={() =>
+              i18n.changeLanguage(currentLang.startsWith("en") ? "es" : "en")
+            }
+            className="text-[10px] font-bold text-gray-600 border border-gray-300 rounded-md px-2 py-1 uppercase tracking-wider active:bg-gray-100"
           >
-            {language}
+            {currentLang.startsWith("es") ? "EN" : "ES"}
           </button>
-          
-          <button className="h-8 w-8 flex items-center justify-center" onClick={() => setOpen(!open)}>
-            {open ? "✕" : "☰"}
+
+          <button
+            className="h-8 w-8 flex items-center justify-center text-gray-700"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -112,14 +94,38 @@ export default function PublicNavbar() {
       <div className={`md:hidden border-t border-gray-200 bg-white transition-all overflow-hidden ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
         <nav className="flex flex-col gap-1 px-4 py-3 text-sm font-medium">
           {navItems.map((item) => (
-            <Link key={item.name} to={item.path} className="rounded-lg px-3 py-2 hover:bg-gray-100">{item.name}</Link>
+            <Link
+              key={item.name}
+              to={item.path}
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2 hover:bg-gray-100"
+            >
+              {item.name}
+            </Link>
           ))}
+
           <div className="h-[1px] bg-gray-100 my-2" />
-          <div className="flex justify-between items-center px-3 py-2">
-            <span className="text-gray-500 uppercase text-[10px] font-bold">Language</span>
-            <div className="flex gap-4">
-               <button onClick={() => setLanguage("EN")} className={language === "EN" ? "text-blue-600 font-bold" : "text-gray-400"}>EN</button>
-               <button onClick={() => setLanguage("ES")} className={language === "ES" ? "text-blue-600 font-bold" : "text-gray-400"}>ES</button>
+
+          {/* Language Selection Row */}
+          <div className="flex justify-between items-center px-3 py-2 bg-gray-50 rounded-xl">
+            <div className="flex items-center gap-2">
+              <Globe size={14} className="text-gray-400" />
+              <span className="text-gray-500 uppercase text-[10px] font-bold tracking-widest">Language</span>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => i18n.changeLanguage('en')}
+                className={`px-3 py-1 rounded-md text-xs transition-all ${i18n.language.startsWith('en') ? "bg-gray-900 text-white font-bold" : "text-gray-400 font-medium"}`}
+              >
+                English
+              </button>
+              <button
+                onClick={() => i18n.changeLanguage('es')}
+                className={`px-3 py-1 rounded-md text-xs transition-all ${i18n.language.startsWith('es') ? "bg-gray-900 text-white font-bold" : "text-gray-400 font-medium"}`}
+              >
+                Español
+              </button>
             </div>
           </div>
         </nav>

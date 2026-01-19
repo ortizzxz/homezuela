@@ -1,0 +1,28 @@
+{
+    "hero": {
+        "title": "Encuentra la casa de tus sueños en",
+        "description": "Descubra apartamentos, casas e inversiones en las principales ciudades venezolanas, con el respaldo de listados verificados y expertos locales.",
+        "trusted_market": "#1 portal de inmobiliarias en Venezuela"
+    },
+    "nav": {
+        "buy": "Comprar",
+        "rent": "Alquilar",
+        "sell": "Vender"
+    },
+    "listing_card": {
+        "sfh": "Casa Familiar",
+        "apartment": "Apartmento",
+        "condo": "Condominio",
+        "land": "Terreno"
+    },
+    "search_card": {
+        "location": "Ubicación",
+        "global_search": "Búsqueda Global",
+        "bedrooms": "Habitaciones",
+        "property_type": "Tipo de Propiedad",
+        "selected": "Escogido/s",
+        "find_properties": "Buscar Propiedades",
+        "any": "Cualquiera",
+        "search_bar_placeholder": "Ciudad, barrio, ZIP..."
+    }
+}
