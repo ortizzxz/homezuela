@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { fakeListings } from "../const/FakeListings";
 import ListingCard from "./ListingCard";
 
 function RecentListings() {
+  const { t } = useTranslation();
   return (
     <section className="w-full bg-gray-50 py-8">
       <div className="mx-auto max-w-6xl px-4">
@@ -9,14 +11,14 @@ function RecentListings() {
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-semibold text-gray-900">
-              New listings
+              {t('recent_listings.new_listings')}
             </h2>
             <p className="text-sm text-gray-600">
-              Fresh homes recently added to Homezuela.com
+              {t('recent_listings.fresh_homes')}
             </p>
           </div>
           <button className="hidden text-sm font-medium text-blue-700 hover:underline md:inline">
-            View all
+            {t('common.view_all')}
           </button>
         </div>
 
@@ -30,7 +32,7 @@ function RecentListings() {
         {/* Mobile "View all" */}
         <div className="mt-4 flex justify-center md:hidden">
           <button className="text-sm font-medium text-blue-700 hover:underline">
-            View all
+            {t('common.view_all')}
           </button>
         </div>
       </div>

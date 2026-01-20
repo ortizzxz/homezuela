@@ -100,7 +100,7 @@ export default function SearchFilters({ onSearch }: Props) {
     const typeOptions = ["house", "flat", "land/terrain", "other"];
 
     return (
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-6 mb-8">
+        <div className="w-full bg-white overflow-hidden rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-6 mb-8">
             {/* Desktop: Exact horizontal layout you want */}
             <div className="hidden md:flex flex-wrap items-center gap-4 mb-2">
 

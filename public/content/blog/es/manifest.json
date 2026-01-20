@@ -1,0 +1,13 @@
+[
+  {
+    "id": 2,
+    "slug": "guia-compra-caracas",
+    "title": "Guia de Compra para Caracas",
+    "category": "buying",
+    "imageUrl": "/images/blog/caracas.jpg",
+    "author": "Maria Gonzalez",
+    "date": "Jan 15, 2026",
+    "readTime": "lectura de 8 min",
+    "excerpt": "Una guia completa para navegar el mercado inmobiliario en la capital."
+  }
+]

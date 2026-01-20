@@ -7,32 +7,25 @@ import BuyPage from "./pages/BuyPage";
 import SellPage from "./pages/SellPage";
 import AdvertisePage from "./pages/AdvertisePage";
 import RentPage from "./pages/RentPage";
+import BlogDetail from "./components/BlogDetail";
+
 function App() {
   return (
     <>
       <PublicNavbar />
-
       <Routes>
-        {/* Home page */}
         <Route path="/" element={<HomePage />} />
-
-        {/* Blog page */}
         <Route path="/buy" element={<BuyPage />} />
-
-        {/* Rent page */}
         <Route path="/rent" element={<RentPage />} />
-
-        {/* Blog page */}
+        
+        {/* Main Blog List */}
         <Route path="/blog" element={<BlogPage />} />
         
-        {/* Sell page */}
-        <Route path="/sell" element={<SellPage />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
         
-        {/* Advertise page */}
+        <Route path="/sell" element={<SellPage />} />
         <Route path="/advertise" element={<AdvertisePage />} />
-
       </Routes>
-
       <Footer />
     </>
   );

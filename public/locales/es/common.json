@@ -5,9 +5,17 @@
         "trusted_market": "#1 portal de inmobiliarias en Venezuela"
     },
     "nav": {
-        "buy": "Comprar",
-        "rent": "Alquilar",
-        "sell": "Vender"
+        "nav_items": {
+            "buy": "Comprar",
+            "rent": "Alquilar",
+            "sell": "Vender",
+            "find_realtors": "Encontrar Agentes",
+            "blog": "Blog",
+            "login": "Iniciar Sesión",
+            "advertise": "Publicar",
+            "english": "Inglés",
+            "spanish": "Español"
+        }
     },
     "listing_card": {
         "sfh": "Casa Familiar",
@@ -26,6 +34,32 @@
         "search_bar_placeholder": "Ciudad, barrio, ZIP...",
          "price_range": "Rango de Precios",
         "monthly": "Mensual",
-        "search": "Buscar Propiedades"
+        "search_tip": "Tip: Empieza con una ciudad y luego usa los filtros para obtener mejores resultados."
+    },
+    "recent_listings": {
+        "new_listings": "Publicadas Recientemente",
+        "fresh_homes": "Últimas casas publicadas en Homezuela.com"
+    },
+    "common": {
+        "view_all": "Ver Todo"
+    },
+    "blog": {
+        "hero_title": "Real Estate Venezolano",
+        "hero_subtitle": "El blog inmobiliario más leído en Venezuela",
+        "categories": {
+            "all": "Todos los artículos",
+            "buying": "Comprar",
+            "selling": "Vender",
+            "renting": "Alquilar",
+            "investment": "Invertir",
+            "market_updates": "Actualizaciones del Mercado"
+        },
+        "no_articles_found": "No se han encontrado artículos",
+        "search_placeholder": "Buscar un blog...", 
+        "newsletter_title": "Suscríbete a nuestra Prensa",
+        "newsletter_desc": "Obten la información más reciente, cambios de tendencias en el mercado, posibilidades de inversión y mucho más en tu bandeja de correo.",
+        "subscribe": "Suscribirse",
+        "read_article": "Leer Artículo",
+        "back_to_magazine": "Tdoos los Blogs"
     }
 }

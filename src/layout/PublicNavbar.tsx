@@ -7,14 +7,14 @@ import { useTranslation } from "react-i18next";
 export default function PublicNavbar() {
   const { i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState(i18n.language);
-
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const navItems = [
-    { name: "Buy", path: "/buy" },
-    { name: "Rent", path: "/rent" },
-    { name: "Sell", path: "/sell" },
-    { name: "Find Realtors", path: "/realtors" },
-    { name: "Blog", path: "/blog" },
+    { name: t('nav.nav_items.buy'), path: "/buy" },
+    { name: t('nav.nav_items.rent'), path: "/rent" },
+    { name: t('nav.nav_items.sell'), path: "/sell" },
+    { name: t('nav.nav_items.find_realtors'), path: "/realtors" },
+    { name: t('nav.nav_items.blog'), path: "/blog" },
   ];
 
 
@@ -54,10 +54,10 @@ export default function PublicNavbar() {
         {/* Desktop right buttons */}
         <div className="hidden md:flex h-full items-center gap-2">
           <Link to="/login" className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-black transition-colors">
-            Log in
+            {t('nav.nav_items.login')}
           </Link>
           <Link to="/advertise" className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-black transition-colors">
-            Advertise
+            {t('nav.nav_items.advertise')}
           </Link>
 
           {/* Divider */}
@@ -118,13 +118,13 @@ export default function PublicNavbar() {
                 onClick={() => i18n.changeLanguage('en')}
                 className={`px-3 py-1 rounded-md text-xs transition-all ${i18n.language.startsWith('en') ? "bg-gray-900 text-white font-bold" : "text-gray-400 font-medium"}`}
               >
-                English
+                {t('nav.nav_items.english')}
               </button>
               <button
                 onClick={() => i18n.changeLanguage('es')}
                 className={`px-3 py-1 rounded-md text-xs transition-all ${i18n.language.startsWith('es') ? "bg-gray-900 text-white font-bold" : "text-gray-400 font-medium"}`}
               >
-                Español
+                {t('nav.nav_items.spanish')}
               </button>
             </div>
           </div>

@@ -5,9 +5,17 @@
         "trusted_market": "#1 trusted Venezuelan real estate market"
     },
     "nav": {
-        "buy": "Buy",
-        "rent": "Rent",
-        "sell": "Sell"
+        "nav_items": {
+            "buy": "Buy",
+            "rent": "Rent",
+            "sell": "Sell",
+            "find_realtors": "Find Realtors",
+            "blog": "Blog",
+            "login": "Log In",
+            "advertise": "Advertise",
+            "english": "English",
+            "spanish": "Spanish"
+        }
     },
     "listing_card": {
         "sfh": "Single Family Home",
@@ -26,6 +34,32 @@
         "search_bar_placeholder": "City, neighborhood, ZIP...",
         "price_range": "Price Range",
         "monthly": "Monthly",
-        "search": "Search Properties"
+        "search_tip": "Tip: Start with a city name, then narrow down by neighborhood or price range."
+    },
+    "recent_listings": {
+        "new_listings": "New Listings",
+        "fresh_homes": " Fresh homes recently added to Homezuela.com"
+    },
+    "common": {
+        "view_all": "View All"
+    },
+    "blog": {
+        "hero_title": "Venezuela Real Estate Blog",
+        "hero_subtitle": "#1 trusted Real Estate blog in Venezuela",
+        "categories": {
+            "all": "All Articles",
+            "buying": "Buying",
+            "selling": "Selling",
+            "renting": "Renting",
+            "investment": "Investment",
+            "market_updates": "Market Updates"
+        },
+        "no_articles_found": "No Articles found",
+        "search_placeholder": "Search for a blog...", 
+        "newsletter_title": "Subscribe to our Newsletter",
+        "newsletter_desc": "Get the most recent insights, market changes, investment opportuinities and much more right in your inbox.",
+        "subscribe": "Subscribe",
+        "read_article": "Read Article",
+        "back_to_magazine": "All Blogs"
     }
 }
