@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ChevronLeft, Calendar, User, Share2, Clock } from "lucide-react";
+import { ChevronLeft, Calendar, User, Clock } from "lucide-react";
 
 export default function BlogDetail() {
     const { slug } = useParams();

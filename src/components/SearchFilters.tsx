@@ -105,7 +105,7 @@ export default function SearchFilters({ onSearch }: Props) {
             <div className="hidden md:flex flex-wrap items-center gap-4 mb-2">
 
                 {/* Location Search */}
-                <div className="flex flex-col gap-1.5 flex-shrink-0 min-w-[240px]">
+                <div className="flex flex-col gap-1.5 shrink-0 min-w-60">
                     <div className="flex justify-between items-end px-1">
                         <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.location')}</span>
                         <span className="text-[10px] text-gray-400 font-medium italic">{t('search_card.global_search')}</span>
@@ -122,7 +122,7 @@ export default function SearchFilters({ onSearch }: Props) {
                 </div>
 
                 {/* Beds */}
-                <div className="flex flex-col gap-1.5 flex-shrink-0">
+                <div className="flex flex-col gap-1.5 shrink-0">
                     <div className="flex justify-between items-end px-1">
                         <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.bedrooms')}</span>
                         {filters.beds && (
@@ -149,7 +149,7 @@ export default function SearchFilters({ onSearch }: Props) {
                 </div>
 
                 {/* Property Type */}
-                <div className="flex flex-col gap-1.5 flex-shrink-0">
+                <div className="flex flex-col gap-1.5 shrink-0">
                     <div className="flex justify-between items-end px-1">
                         <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.property_type')}</span>
                         <span className="text-[10px] text-blue-600 font-bold bg-blue-50 px-1.5 py-0.5 rounded">
@@ -176,7 +176,7 @@ export default function SearchFilters({ onSearch }: Props) {
                 </div>
 
                 {/* Price (Your existing logic, slightly tightened) */}
-                <div className="flex flex-col gap-1.5 flex-shrink-0">
+                <div className="flex flex-col gap-1.5 shrink-0">
                     <div className="flex justify-between items-end px-1">
                         <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{t('search_card.price_range')}</span>
                         {isRentPage && (
@@ -209,7 +209,7 @@ export default function SearchFilters({ onSearch }: Props) {
                 <div className="flex-1 flex justify-end items-end h-full self-end pb-0.5">
                     <button
                         onClick={handleSearchClick}
-                        className="bg-gray-900 hover:bg-black text-white px-8 py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all text-sm flex items-center gap-2"
+                        className="bg-gray-900 hover:bg-black text-white px-8 py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all text-sm flex items-center gap-2 cursor-pointer"
                     >
                         {t('search_card.search')}
                         <Search className="w-4 h-4" />
@@ -251,7 +251,7 @@ export default function SearchFilters({ onSearch }: Props) {
                                 <button
                                     key={b}
                                     onClick={() => handleChange("beds", b)}
-                                    className={`px-4 py-2 rounded-lg transition-all text-sm font-medium min-w-[60px] ${filters.beds === b
+                                    className={`px-4 py-2 rounded-lg transition-all text-sm font-medium min-w-15 ${filters.beds === b
                                             ? "bg-gray-900 text-white shadow-sm"
                                             : "bg-white text-gray-700 border border-gray-200 shadow-sm"
                                         }`}
