@@ -13,10 +13,9 @@ function PublicHero() {
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">
             {t('hero.title')}{" "}
-            <span className="bg-gradient-to-r from-yellow-400 via-blue-600 to-red-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-yellow-400 via-blue-600 to-red-600 bg-clip-text text-transparent">
               Venezuela
             </span>
-            .
           </h1>
           <p className="max-w-xl text-sm text-gray-600 md:text-base">
             {t('hero.description')}

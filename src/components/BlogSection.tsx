@@ -50,37 +50,25 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
-      <section className="bg-white border-b border-gray-200 py-4">
-        <div className="mx-auto max-w-7xl px-4 text-center">
-          <h1 className="text-5xl font-black text-gray-900 font-medium mb-4">
-            {t("blog.hero_title")}
-          </h1>
-          <p className="ttext-xs font-semibold uppercase tracking-[0.15em] text-blue-700">
-            {t("blog.hero_subtitle")}
-          </p>
-        </div>
-      </section>
-
-      <div className="mx-auto px-4 py-8 lg:px-8">
+      <div className="mx-auto px-4 py-2">
         {/* Search and Filters Bar (Centered) */}
-        <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row gap-4 mb-4   mx-auto">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder={t("blog.search_placeholder")}
-              className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-gray-900 outline-none transition-all"
+              className="w-full pl-12 pr-4 py-2 bg-white border border-gray-200 rounded-2xl shadow-sm focus:ring-2 focus:ring-gray-900 outline-none transition-all"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 md:pb-0">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar md:overflow-visible">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-6 py-3 rounded-2xl text-sm font-bold whitespace-nowrap transition-all ${selectedCategory === cat.id
+                className={`px-6 py-2 md:py-0 rounded-2xl text-sm font-bold whitespace-nowrap transition-all ${selectedCategory === cat.id
                     ? "bg-gray-900 text-white shadow-lg scale-105"
                     : "bg-white text-gray-500 border border-gray-200 hover:border-gray-400"
                   }`}
@@ -96,9 +84,8 @@ export default function BlogPage() {
           {filteredArticles.length > 0 ? (
             <motion.div
               key={selectedCategory + searchQuery + lang}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {/* --- INJECTED NEWSLETTER CARD --- */}

@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <footer className="w-full bg-gray-900 border-t border-gray-800">
-            <div className="mx-auto max-w-6xl px-4 py-12">
+            <div className="mx-auto max-w-6xl p-4">
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-5 lg:gap-6">
 
                     {/* Logo & Description */}
@@ -9,7 +9,7 @@ function Footer() {
                         <a href="/" className="flex items-center gap-2 mb-4">
                             <span className="text-2xl tracking-tight text-white">
                                 Home
-                                <span className="bg-gradient-to-r from-yellow-400 via-blue-600 to-red-600 bg-clip-text text-transparent">
+                                <span className="bg-linear-to-r from-yellow-400 via-blue-600 to-red-600 bg-clip-text text-transparent">
                                     zuela
                                 </span>
                                 .com
@@ -72,6 +72,7 @@ function Footer() {
                             <li><a href="#" className="hover:text-white transition-colors">Contact us</a></li>
                             <li><a href="#" className="hover:text-white transition-colors">List your home</a></li>
                             <li><a href="#" className="hover:text-white transition-colors">Advertise</a></li>
+                            <li><a href="https://www.linkedin.com/in/jesusdortizreyes/" target="_blank" className="hover:text-white transition-colors">Made By</a></li>
                         </ul>
                     </div>
                 </div>
