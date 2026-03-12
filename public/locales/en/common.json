@@ -15,13 +15,18 @@
             "advertise": "Advertise",
             "english": "English",
             "spanish": "Spanish"
-        }
+        },
+        "test_navbar": "You're currently seeing a test version. This site is under development and we hope to launch it soon for you."
     },
     "listing_card": {
         "sfh": "Single Family Home",
         "apartment": "Apartment",
         "condo": "Condo",
-        "land": "Land"
+        "land": "Land",
+        "new": "New",
+        "beds_shortened": "bd",
+        "bathroom_shortened": "ba",
+        "square_meter": "m²"
     },
     "search_card": {
         "location": "Location",
@@ -34,7 +39,8 @@
         "search_bar_placeholder": "City, neighborhood, ZIP...",
         "price_range": "Price Range",
         "monthly": "Monthly",
-        "search_tip": "Tip: Start with a city name, then narrow down by neighborhood or price range."
+        "search_tip": "Tip: Start with a city name, then narrow down by neighborhood or price range.",
+        "search": "Search Properties"
     },
     "recent_listings": {
         "new_listings": "New Listings",

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import ListingCard from "./ListingCard";
-import { fakeListings } from "../const/FakeListings";
 import SearchFilters from "./SearchFilters";
+import { fakeRentals } from "../const/FakeListings";
 
 export default function RentSection() {
-  const [filteredListings, setFilteredListings] = useState(fakeListings);
+  const [filteredListings, setFilteredListings] = useState(fakeRentals);
 
   const handleSearch = (filters: any) => {
-  let results = fakeListings;
+  let results = fakeRentals;
 
   if (filters.type) {
     results = results.filter((l) => l.type === filters.type);

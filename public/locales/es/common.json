@@ -15,13 +15,18 @@
             "advertise": "Publicar",
             "english": "Inglés",
             "spanish": "Español"
-        }
+        },
+        "test_navbar": "Te encuentras en una versión de prueba del sitio. Actualmente se encuentra en desarrollo y esperamos poder lanzarlo pronto."
     },
     "listing_card": {
         "sfh": "Casa Familiar",
         "apartment": "Apartmento",
         "condo": "Condominio",
-        "land": "Terreno"
+        "land": "Terreno",
+        "new": "Nueva",
+        "beds_shortened": "hab",
+        "bathroom_shortened": "bñs",
+        "square_meter": "m²"
     },
     "search_card": {
         "location": "Ubicación",
@@ -34,7 +39,8 @@
         "search_bar_placeholder": "Ciudad, barrio, ZIP...",
          "price_range": "Rango de Precios",
         "monthly": "Mensual",
-        "search_tip": "Tip: Empieza con una ciudad y luego usa los filtros para obtener mejores resultados."
+        "search_tip": "Tip: Empieza con una ciudad y luego usa los filtros para obtener mejores resultados.",
+        "search": "Buscar Propiedades"
     },
     "recent_listings": {
         "new_listings": "Publicadas Recientemente",

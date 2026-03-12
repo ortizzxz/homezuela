@@ -8,7 +8,6 @@ While global markets face volatility, Caracas remains a unique micro-environment
 * **Commercial Growth**: Las Mercedes has become the focal point for new corporate headquarters.
 * **Residential Stability**: Established neighborhoods like Altamira continue to hold prestige.
 
----
 
 ## Top Neighborhoods to Watch
 
@@ -24,5 +23,3 @@ While global markets face volatility, Caracas remains a unique micro-environment
 1.  **Water Supply**: Does the building have a deep well (*pozo*)?
 2.  **Power Backup**: Is there a full-load generator for the apartment?
 3.  **Title History**: Ensure the documentation is cleared through the proper registry.
-
-Looking for a personalized tour? Contact our team today.

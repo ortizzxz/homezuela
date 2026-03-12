@@ -10,8 +10,8 @@ function ListingCard({ listing }: ListingProps) {
 
   const typeTranslations: Record<string, string> = {
     SFH: "listing_card.sfh",
-    Apartment: "listing_card.apartment",
-    Condo: "listing_card.condo",
+    apartment: "listing_card.apartment",
+    condo: "listing_card.condo",
   };
 
   const translationKey = typeTranslations[listing.type] || listing.type;
@@ -19,7 +19,7 @@ function ListingCard({ listing }: ListingProps) {
   return (
     <article className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       {/* Image */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-4/3 overflow-hidden">
         <img
           src={listing.imageUrl}
           alt={listing.title}
@@ -27,21 +27,18 @@ function ListingCard({ listing }: ListingProps) {
         />
         {listing.isNew && (
           <span className="absolute left-2 top-2 rounded-full bg-blue-600 px-2 py-0.5 text-[11px] font-semibold tracking-wide text-white">
-            New
+            {t('listing_card.new')}
           </span>
         )}
       </div>
 
       {/* Property type */}
-      <div className="mt-1 flex items-center gap-2 p-2">
-        {/* Blue dot */}
-        <span className="h-2 w-2 rounded-full bg-blue-500 inline-block"></span>
-        {/* Text */}
+      <div className="flex items-center gap-2 px-2 pt-1">
         <span className="text-sm text-gray-700">{t(translationKey)}</span>
       </div>
 
       {/* Content */}
-      <div className="space-y-1 p-3">
+      <div className="space-y-1 px-3 pb-1">
         <div className="flex items-center justify-between">
           <p className="font-semibold text-2xl text-gray-900">
             {new Intl.NumberFormat('en-US', {
@@ -62,13 +59,13 @@ function ListingCard({ listing }: ListingProps) {
 
         <div className="mt-1 flex flex-wrap gap-3 text-md text-gray-900">
           <span>
-            <span className="font-semibold text-lg text-black">{listing.beds}</span> bd
+            <span className="font-semibold text-lg text-black">{listing.beds}</span> {t('listing_card.beds_shortened')}
           </span>
           <span>
-            <span className="font-semibold text-lg text-black">{listing.baths}</span> ba
+            <span className="font-semibold text-lg text-black">{listing.baths}</span> {t('listing_card.bathroom_shortened')}
           </span>
           <span>
-            <span className="font-semibold text-lg text-black">{listing.sqft}</span> m²
+            <span className="font-semibold text-lg text-black">{listing.sqft}</span> {t('listing_card.square_meter')}
           </span>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Globe, Menu, X } from "lucide-react";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
@@ -30,24 +30,33 @@ export default function PublicNavbar() {
 
   return (
     <header className="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
+      {/* announcement bar */}
+      <div className="w-full bg-amber-100 border-b border-amber-200 text-center text-sm text-amber-900 py-1">
+        {t("nav.test_navbar")}
+      </div>
+
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex-shrink-0">
+        <Link to="/" className="shrink-0">
           <span className="text-2xl font-semibold tracking-tight">
-            Home<span className="bg-gradient-to-r from-yellow-400 via-blue-600 to-red-600 bg-clip-text text-transparent">zuela</span>.com
+            Home<span className="bg-linear-to-r from-yellow-400 via-blue-600 to-red-600 bg-clip-text text-transparent">zuela</span>.com
           </span>
         </Link>
 
         {/* Desktop navigation */}
         <nav className="hidden md:flex h-full items-stretch text-sm font-medium text-gray-600 ml-8">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.name}
               to={item.path}
-              className="relative px-4 flex items-center hover:text-black transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-black after:transition-all hover:after:w-full"
+              className={({ isActive }) =>
+                `relative px-4 flex items-center transition-colors
+                 ${isActive ? "text-black font-semibold after:w-full" : "text-gray-600 hover:text-black"}
+                 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-black after:transition-all after:w-0 hover:after:w-full`
+              }
             >
               {item.name}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
@@ -61,7 +70,7 @@ export default function PublicNavbar() {
           </Link>
 
           {/* Divider */}
-          <div className="h-4 w-[1px] bg-gray-300 mx-2" />
+          <div className="h-4 w-px bg-gray-300 mx-2" />
 
           {/* Language Dropdown */}
           <div className="relative ml-2">
@@ -94,17 +103,20 @@ export default function PublicNavbar() {
       <div className={`md:hidden border-t border-gray-200 bg-white transition-all overflow-hidden ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
         <nav className="flex flex-col gap-1 px-4 py-3 text-sm font-medium">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.name}
               to={item.path}
               onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2 hover:bg-gray-100"
+              className={({ isActive }) =>
+                `rounded-lg px-3 py-2 transition
+                ${isActive ? "bg-gray-900 text-white font-semibold" : "hover:bg-gray-100"}`
+              }
             >
               {item.name}
-            </Link>
+            </NavLink>
           ))}
 
-          <div className="h-[1px] bg-gray-100 my-2" />
+          <div className="h-px bg-gray-100 my-2" />
 
           {/* Language Selection Row */}
           <div className="flex justify-between items-center px-3 py-2 bg-gray-50 rounded-xl">
